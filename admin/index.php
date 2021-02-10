@@ -1,4 +1,4 @@
-<?php require_once('include/startup.php'); ?>
+<?php require_once('include/startup.php');// require() | include() | include_once(); ?>
 <?php require_once('library/index_lib.php'); ?>
 <!DOCTYPE html>
 <html>
@@ -29,6 +29,8 @@
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
+	  
+<?php showAlert(); ?>
 
       <form action="" method="post">
         <div class="input-group mb-3">

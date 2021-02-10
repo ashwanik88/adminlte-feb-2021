@@ -1,3 +1,4 @@
+<?php require_once('include/startup.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -713,10 +714,14 @@
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
+        <div class="row mb-2">
+          <div class="col-sm-12">
+		<?php showAlert(); ?>
+		</div></div>
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
+	
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">

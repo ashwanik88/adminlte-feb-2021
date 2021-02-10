@@ -10,13 +10,17 @@ if($_POST){
 		$rs = mysqli_query($conn, $sql);
 		if(mysqli_num_rows($rs) > 0){
 			// echo 'redirect to dashboard!';
-			header('Location: dashboard.php');
-			die;
+			// header('Location: dashboard.php');
+			// die;
+			addAlert('success', 'Successfully logged in!');
+			redirect('dashboard.php');
 		}else{
-			echo 'incorrect details';
+			// $_SESSION['alert']['type'] = 'danger';
+			// $_SESSION['alert']['msg'] = 'Incorrect login details!';
 			
+			addAlert('danger', 'Incorrect login details!');
+			redirect('index.php');
 		}
-		
-		die;
+
 	}
 }
