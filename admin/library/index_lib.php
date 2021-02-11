@@ -9,9 +9,17 @@ if($_POST){
 		
 		$rs = mysqli_query($conn, $sql);
 		if(mysqli_num_rows($rs) > 0){
-			// echo 'redirect to dashboard!';
-			// header('Location: dashboard.php');
+			
+			// $data = mysqli_fetch_row($rs);
+			 $data = mysqli_fetch_assoc($rs);
+			// $data = mysqli_fetch_array($rs);
+			// $data = mysqli_fetch_object($rs);
+			
+			// echo '<pre>';
+				// print_r($data['username']);
+				// // print_r($data->username);
 			// die;
+			$_SESSION['admin_user'] = $data;
 			addAlert('success', 'Successfully logged in!');
 			redirect('dashboard.php');
 		}else{

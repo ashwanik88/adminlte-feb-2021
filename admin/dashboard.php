@@ -1,4 +1,5 @@
 <?php require_once('include/startup.php'); ?>
+<?php require_once('library/dashboard_lib.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,8 +135,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i
-            class="fas fa-th-large"></i></a>
+        <a class="nav-link" title="Logout" href="logout.php" role="button"><i class="fas fa-power-off"></i></a>
       </li>
     </ul>
   </nav>

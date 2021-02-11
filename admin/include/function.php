@@ -1,5 +1,10 @@
 <?php
-
+function checkUserLogin(){
+	if(!isset($_SESSION['admin_user']) || empty($_SESSION['admin_user'])){
+		addAlert('warning','Restricted Area - Access denied!');
+		redirect('index.php');
+	}
+}
 function redirect($url){
 	header('Location: ' . $url);
 	die;
@@ -8,7 +13,7 @@ function redirect($url){
 //function showAlert($type, $message){
 function showAlert(){
 	$str = '';
-	if(isset($_SESSION['alert']['type']) && !empty($_SESSION['alert']['type']) && isset($_SESSION['alert']['msg']) && !empty($_SESSION['alert']['msg'])){
+	if(isset($_SESSION['alert']) && !empty($_SESSION['alert'])){
 		$type = $_SESSION['alert']['type'];
 		$msg = $_SESSION['alert']['msg'];
 		$str = '<div class="alert alert-'. $type .' alert-dismissible fade show" role="alert">';
