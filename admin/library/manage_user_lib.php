@@ -2,7 +2,7 @@
  
  $document_title = 'Manage Users';
  
- $sql = "SELECT * FROM ". DB_PREFIX ."users";
+ $sql = "SELECT * FROM ". DB_PREFIX ."users ORDER BY user_id DESC";
  
  $rs = mysqli_query($conn, $sql);
  

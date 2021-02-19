@@ -77,7 +77,7 @@
 							<td><?php echo $data_user['firstname']; ?> <?php echo $data_user['lastname']; ?></td>
 							<td><?php echo $data_user['status']; ?></td>
 							<td><?php echo $data_user['date_added']; ?></td>
-							<td>Edit</td>
+							<td><a href="form_user.php?user_id=<?php echo $data_user['user_id']; ?>">Edit</a></td>
 						</tr>
 					<?php } ?>
 				  <?php }else{ ?>
