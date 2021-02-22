@@ -1,4 +1,11 @@
 <?php
+function getLoggedUser(){
+	$username = '';
+	if(isset($_SESSION['admin_user']) && !empty($_SESSION['admin_user'])){
+		$username = $_SESSION['admin_user']['firstname'] . ' ' . $_SESSION['admin_user']['lastname'];
+	}
+	return $username;
+}
 function checkUserLogin(){
 	if(!isset($_SESSION['admin_user']) || empty($_SESSION['admin_user'])){
 		addAlert('warning','Restricted Area - Access denied!');

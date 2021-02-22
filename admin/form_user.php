@@ -92,11 +92,11 @@
                     <div class="offset-sm-2 col-sm-10">
                       <div class="form-group">
                         <div class="custom-control custom-radio">
-                          <input class="custom-control-input" type="radio" id="rActive" name="status" value="1" checked="checked">
+                          <input class="custom-control-input" type="radio" id="rActive" name="status" value="1" <?php echo ($status == 1)?'checked="checked"':'';?>>
                           <label for="rActive" class="custom-control-label">Active</label>
                         </div>
                         <div class="custom-control custom-radio">
-                          <input class="custom-control-input" type="radio" id="rInactive" name="status" value="0">
+                          <input class="custom-control-input" type="radio" id="rInactive" name="status" value="0" <?php echo ($status == 0)?'checked="checked"':'';?>>
                           <label for="rInactive" class="custom-control-label">Inactive</label>
                         </div>
                       </div>
