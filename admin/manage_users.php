@@ -36,10 +36,11 @@
           <div class="col-md-12">
 
 <div class="card">
+				<form action="" method="POST">
               <div class="card-header">
                 <h3 class="card-title">User Listing</h3>
 				<div class="float-right">
-					<a class="btn btn-danger btn-sm" href="#">Delete User</a>
+					<input type="submit" onclick="return confirm('Are you sure want to delete!');" class="btn btn-danger btn-sm" value="Delete User" />
 					<a class="btn btn-primary btn-sm" href="form_user.php">Add New User</a>
 				</div>
               </div>
@@ -55,7 +56,7 @@
                     <th>Name</th>
                     <th>Status</th>
                     <th>Date Added</th>
-                    <th>Action</th>
+                    <th width="140px">Action</th>
                   </tr>
 				  <tr>
 					<td></td>
@@ -71,13 +72,13 @@
                   <?php if(sizeof($data_users)){ ?>
 					<?php foreach($data_users as $data_user){ ?>
 						<tr>
-							<td><input type="checkbox" class="chk" /></td>
+							<td><input type="checkbox" class="chk" value="<?php echo $data_user['user_id']; ?>" name="user_ids[]" /></td>
 							<td><?php echo $data_user['user_id']; ?></td>
 							<td><?php echo $data_user['email']; ?></td>
 							<td><?php echo $data_user['firstname']; ?> <?php echo $data_user['lastname']; ?></td>
 							<td><?php echo $data_user['status']; ?></td>
 							<td><?php echo $data_user['date_added']; ?></td>
-							<td><a href="form_user.php?user_id=<?php echo $data_user['user_id']; ?>">Edit</a></td>
+							<td><a onclick="return confirm('Are you sure want to delete this?');" href="manage_users.php?user_id=<?php echo $data_user['user_id']; ?>">Delete</a> | <a href="form_user.php?user_id=<?php echo $data_user['user_id']; ?>">Edit</a></td>
 						</tr>
 					<?php } ?>
 				  <?php }else{ ?>
@@ -99,6 +100,7 @@
                   <li class="page-item"><a class="page-link" href="#">»</a></li>
                 </ul>
               </div>
+			  </form>
             </div>
             <!-- /.card -->     
 
