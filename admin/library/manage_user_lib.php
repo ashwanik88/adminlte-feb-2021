@@ -20,7 +20,26 @@
  }
  
  
- $sql = "SELECT * FROM ". DB_PREFIX ."users ORDER BY user_id DESC";
+ // $sql = "SELECT * FROM ". DB_PREFIX ."users ORDER BY user_id DESC LIMIT 10, 5";
+ //pagination starts
+ $page_limit = 5;
+ $page_start = 0;	// 0, 5 , 10
+ $total_users = 0;
+ $sql_total = "SELECT count(*) as total FROM ". DB_PREFIX ."users ORDER BY user_id DESC";
+ $rs_total = mysqli_query($conn, $sql_total);
+ if(mysqli_num_rows($rs_total)){
+	$rec_total = mysqli_fetch_assoc($rs_total);
+	$total_users = $rec_total['total'];
+ }
+ if(isset($_GET['page']) && !empty($_GET['page'])){
+	$page = $_GET['page'];
+	$page_start = ($page - 1) * $page_limit;
+ }
+ //pagination ends
+ // 0 , 5 , 10
+ // 1, 2 , 3
+ 
+ $sql = "SELECT * FROM ". DB_PREFIX ."users ORDER BY user_id DESC LIMIT ". $page_start .", " . $page_limit;
  
  $rs = mysqli_query($conn, $sql);
  
