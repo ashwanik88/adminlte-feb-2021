@@ -19,6 +19,18 @@
 	 }
  }
  
+ //sorting starts
+ $sort_by = 'user_id';
+ $sort_swap = $sort_order = 'DESC';
+ $sort_url = '';
+ if(isset($_GET['sort_by']) && !empty($_GET['sort_by']) && isset($_GET['sort_order']) && !empty($_GET['sort_order'])){
+	$sort_by = $_GET['sort_by'];
+	$sort_order = $_GET['sort_order'];
+	
+	$sort_swap = ($_GET['sort_order'] == 'ASC')?'DESC':'ASC';
+	$sort_url = '&sort_by='. $sort_by .'&sort_order=' . $sort_order;
+ }
+ //sorting ends
  
  // $sql = "SELECT * FROM ". DB_PREFIX ."users ORDER BY user_id DESC LIMIT 10, 5";
  //pagination starts
@@ -27,6 +39,7 @@
  $total_users = 0;
  $sql_total = "SELECT count(*) as total FROM ". DB_PREFIX ."users ORDER BY user_id DESC";
  $rs_total = mysqli_query($conn, $sql_total);
+ $pagination_url = '';
  if(mysqli_num_rows($rs_total)){
 	$rec_total = mysqli_fetch_assoc($rs_total);
 	$total_users = $rec_total['total'];
@@ -34,12 +47,13 @@
  if(isset($_GET['page']) && !empty($_GET['page'])){
 	$page = $_GET['page'];
 	$page_start = ($page - 1) * $page_limit;
+	$pagination_url = 'page=' . $page;
  }
  //pagination ends
  // 0 , 5 , 10
  // 1, 2 , 3
  
- $sql = "SELECT * FROM ". DB_PREFIX ."users ORDER BY user_id DESC LIMIT ". $page_start .", " . $page_limit;
+ $sql = "SELECT * FROM ". DB_PREFIX ."users ORDER BY ". $sort_by ." ". $sort_order ." LIMIT ". $page_start .", " . $page_limit;
  
  $rs = mysqli_query($conn, $sql);
  

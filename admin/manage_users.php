@@ -51,11 +51,11 @@
                   <tr>
                     <!-- <th width="10"><input type="checkbox" class="chkAll" onclick="($(this).is(':checked'))?$('.chk').attr('checked', true):$('.chk').attr('checked', false);" /></th>--> 
                     <th width="10"><input type="checkbox" class="chkAll" onclick="$('.chk').attr('checked', $('.chkAll').is(':checked'));" /></th>
-                    <th>User Id</th>
-                    <th>Email</th>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Date Added</th>
+                    <th><a href="manage_users.php?<?php echo $pagination_url; ?>&sort_by=user_id&sort_order=<?php echo $sort_swap; ?>">User Id</a></th>
+					<th><a href="manage_users.php?<?php echo $pagination_url; ?>&sort_by=email&sort_order=<?php echo $sort_swap; ?>">Email</a></th>
+					<th><a href="manage_users.php?<?php echo $pagination_url; ?>&sort_by=firstname&sort_order=<?php echo $sort_swap; ?>">Name</a></th>
+					<th><a href="manage_users.php?<?php echo $pagination_url; ?>&sort_by=status&sort_order=<?php echo $sort_swap; ?>">Status</a></th>
+					<th><a href="manage_users.php?<?php echo $pagination_url; ?>&sort_by=date_added&sort_order=<?php echo $sort_swap; ?>">Date Added</a></th>
                     <th width="140px">Action</th>
                   </tr>
 				  <tr>
@@ -94,7 +94,7 @@
 			  <div class="card-footer clearfix">
                 <ul class="pagination pagination-sm m-0 float-left">
 				  <?php for($i = 1; $i <= ceil($total_users/$page_limit); $i++){ ?>
-                  <li class="page-item"><a class="page-link" href="manage_users.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                  <li class="page-item"><a class="page-link" href="manage_users.php?page=<?php echo $i . $sort_url; ?>"><?php echo $i; ?></a></li>
 				  <?php } ?>
                   
                 </ul>
