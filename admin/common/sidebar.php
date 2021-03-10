@@ -45,6 +45,12 @@
                   <p>Manage Users</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="manage_categories.php" class="nav-link">
+                  <i class="fas fa-sitemap nav-icon"></i>
+                  <p>Manage Categories</p>
+                </a>
+              </li>
             </ul>
           </li>
         </ul>
