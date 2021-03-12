@@ -19,7 +19,7 @@
 	 }
  }
  
- $data_categories = getChildren(0);
+
  
  
  // $sql = "SELECT * FROM ". DB_PREFIX ."categories WHERE parent_id=0";
@@ -50,4 +50,27 @@
 		}
 	}
 	return $data_categories;
+ }
+ 
+ function showCategories($category_id, $parent_name = array()){
+	$sub_children = getChildren($category_id); 
+	if(sizeof($sub_children)){
+			  foreach($sub_children as $child){
+				  	if($category_id == 0){
+						$parent_name = array();
+					}
+					$parent_name[] = $child['category_name'];
+				  ?>
+	<tr>
+		<td><input type="checkbox" class="chk" value="<?php echo $child['category_id']; ?>" name="category_ids[]" /></td>
+		<td><?php echo $child['category_id']; ?></td>
+		
+		<td><?php echo implode(' &raquo; ', $parent_name); ?> </td>
+		<td><?php echo $child['parent_id']; ?></td>
+		<td><a onclick="return confirm('Are you sure want to delete this?');" href="manage_categories.php?category_id=<?php echo $child['category_id']; ?>">Delete</a> | <a href="form_category.php?category_id=<?php echo $child['category_id']; ?>">Edit</a></td>
+	</tr>				
+				  <?php
+				  showCategories($child['category_id'], $parent_name);
+			  }
+		  }
  }
