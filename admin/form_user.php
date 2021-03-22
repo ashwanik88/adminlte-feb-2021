@@ -43,7 +43,7 @@
 				</div>
               </div>
               <!-- /.card-header -->
-              <form class="form-horizontal" method="POST" action="">
+              <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
                 <div class="card-body">
                   <div class="form-group row">
                     <label for="username" class="col-sm-2 col-form-label">Username</label>
@@ -86,6 +86,13 @@
                     <label for="phone" class="col-sm-2 col-form-label">Phone</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" value="<?php echo $phone; ?>">
+                    </div>
+                  </div>
+				  <div class="form-group row">
+                    <label for="photo" class="col-sm-2 col-form-label">Photo</label>
+                    <div class="col-sm-10">
+					  <img src="<?php echo HTTP_UPLOADS. $filename; ?>" width="100px" />
+                      <input type="file" class="form-control" id="photo" name="photo" />
                     </div>
                   </div>
                   <div class="form-group row">

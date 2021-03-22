@@ -8,6 +8,7 @@ $email = '';
 $firstname = '';
 $lastname = '';
 $phone = '';
+$filename = '';
 $status = '1';
 $user_id = 0;
 
@@ -25,6 +26,7 @@ if($_GET){
 		$firstname = $data_user['firstname'];
 		$lastname = $data_user['lastname'];
 		$phone = $data_user['phone'];
+		$filename = $data_user['photo'];
 		$status = $data_user['status'];
 	}
 	
@@ -41,8 +43,13 @@ if($_POST){
 	$status = $_POST['status'];
 	
 	if(validate($user_id)){
+		
+		if(isset($_FILES['photo']) && !empty($_FILES['photo'])){
+			$filename = uploadPhoto($_FILES['photo'], $filename);
+		}
+		
 		if($user_id > 0){	// edit user
-			$sql = "UPDATE ". DB_PREFIX ."users SET username='". $username ."', email='". $email ."', firstname='". $firstname ."', lastname='". $lastname ."', phone='". $phone ."', status='". $status ."', date_modified=NOW() WHERE user_id='". (int)$user_id ."'";
+			$sql = "UPDATE ". DB_PREFIX ."users SET username='". $username ."', email='". $email ."', firstname='". $firstname ."', lastname='". $lastname ."', phone='". $phone ."', photo='". $filename ."', status='". $status ."', date_modified=NOW() WHERE user_id='". (int)$user_id ."'";
 			
 			// update password
 			if(!empty($password)){
@@ -55,7 +62,7 @@ if($_POST){
 			
 			
 		}else{	// add new user
-			$sql = "INSERT INTO ". DB_PREFIX ."users SET username='". $username ."', password='". md5($password) ."', email='". $email ."', firstname='". $firstname ."', lastname='". $lastname ."', phone='". $phone ."', status='". $status ."', date_added=NOW(), date_modified=NOW()";
+			$sql = "INSERT INTO ". DB_PREFIX ."users SET username='". $username ."', password='". md5($password) ."', email='". $email ."', firstname='". $firstname ."', lastname='". $lastname ."', phone='". $phone ."', photo='". $filename ."', status='". $status ."', date_added=NOW(), date_modified=NOW()";
 			addAlert('success','User added successfully');
 		}
 		
@@ -115,6 +122,13 @@ function validate($user_id){
 	if(!preg_match("/^[0-9]{10}$/", $_POST['phone'])) {
 		array_push($errors, 'Invalid phone number!');
 	}
+	
+	if(isset($_FILES['photo']) && !empty($_FILES['photo'])){
+		if($_FILES['photo']['error'] != 0 || ($_FILES['photo']['type'] != 'image/png' && $_FILES['photo']['type'] != 'image/jpg')){
+			array_push($errors, 'Invalid file format!');
+		}
+	}
+	
 	if(sizeof($errors) == 0){
 		return true;
 	}else{
@@ -132,4 +146,16 @@ function getUser($user_id){
 		$data = mysqli_fetch_assoc($rs);
 	}
 	return $data;
+}
+
+function uploadPhoto($src, $old_file = ''){
+	$src_path = $src['tmp_name'];
+	$filename = time() . '_' . $src['name'];
+	$dest_path = DIR_UPLOADS. $filename;
+	copy($src_path, $dest_path);
+	
+	if(!empty($old_file)){
+		unlink(DIR_UPLOADS. $old_file);	
+	}
+	return $filename;
 }

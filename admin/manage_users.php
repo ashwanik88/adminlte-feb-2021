@@ -52,6 +52,7 @@
                     <!-- <th width="10"><input type="checkbox" class="chkAll" onclick="($(this).is(':checked'))?$('.chk').attr('checked', true):$('.chk').attr('checked', false);" /></th>--> 
                     <th width="10"><input type="checkbox" class="chkAll" onclick="$('.chk').attr('checked', $('.chkAll').is(':checked'));" /></th>
                     <th><a href="manage_users.php?<?php echo $pagination_url; ?>&sort_by=user_id&sort_order=<?php echo $sort_swap; ?>">User Id</a></th>
+                    <th>Photo</th>
 					<th><a href="manage_users.php?<?php echo $pagination_url; ?>&sort_by=email&sort_order=<?php echo $sort_swap; ?>">Email</a></th>
 					<th><a href="manage_users.php?<?php echo $pagination_url; ?>&sort_by=firstname&sort_order=<?php echo $sort_swap; ?>">Name</a></th>
 					<th><a href="manage_users.php?<?php echo $pagination_url; ?>&sort_by=status&sort_order=<?php echo $sort_swap; ?>">Status</a></th>
@@ -61,6 +62,7 @@
 				  <tr>
 					<td></td>
 					<td><input type="text" class="form-control" /></td>
+					<td></td>
 					<td><input type="text" class="form-control" /></td>
 					<td><input type="text" class="form-control" /></td>
 					<td><input type="text" class="form-control" /></td>
@@ -74,6 +76,14 @@
 						<tr>
 							<td><input type="checkbox" class="chk" value="<?php echo $data_user['user_id']; ?>" name="user_ids[]" /></td>
 							<td><?php echo $data_user['user_id']; ?></td>
+							<td>
+								<?php if(!empty($data_user['photo'])){ ?>
+								<img src="<?php echo HTTP_UPLOADS. $data_user['photo']; ?>" width="100" />
+								<?php }else{ ?>
+								<img src="<?php echo HTTP_UPLOADS; ?>/avatar.png" width="100" />
+								<?php } ?>
+								
+								</td>
 							<td><?php echo $data_user['email']; ?></td>
 							<td><?php echo $data_user['firstname']; ?> <?php echo $data_user['lastname']; ?></td>
 							<td><?php echo $data_user['status']; ?></td>
