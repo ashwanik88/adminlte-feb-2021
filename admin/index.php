@@ -32,7 +32,7 @@
 	  
 <?php showAlert(); ?>
 
-      <form action="" method="post">
+      <form action="" method="post" id="frmLogin">
         <div class="input-group mb-3">
           <input type="email" name="email" class="form-control" placeholder="Email">
           <div class="input-group-append">
@@ -83,5 +83,27 @@
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 
+<script type="text/javascript">
+$('#frmLogin').submit(function(){
+	$.ajax({
+		url: 'ajax.php',
+		type: 'POST',
+		dataType: 'JSON',
+		data: {
+			'email'	: $('input[name="email"]').val(),
+			'password'	: $('input[name="password"]').val(),
+		},
+		success: function(json){
+			console.log(json);
+			if(json.success == true){
+				window.location.href = 'dashboard.php';
+			}else{
+				alert(json.msg);
+			}
+		}
+	})
+	return false;
+});
+</script>
 </body>
 </html>

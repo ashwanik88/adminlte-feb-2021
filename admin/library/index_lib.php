@@ -31,6 +31,8 @@ if($_COOKIE){
 }
 
 if($_POST){
+	echo json_encode(array('success' => true));
+	die;
 	if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['password']) && !empty($_POST['password'])){
 		$email = $_POST['email'];
 		$password = md5($_POST['password']);
